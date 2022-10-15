@@ -1,16 +1,22 @@
+
 from pytube import YouTube
 
-link=input("enter the link of video")
-yt=YouTube(link)
-videos=yt.streams.all()
+url = 'https://www.youtube.com/watch?v=YjllO7-K9k4'
+my_video = YouTube(url)
 
-i=1
-for stream in videos:
-    print(str(i)+ " "+str(stream))
-    i += 1
-    
-stream_number=int(input("enter the number"))
-video=videos[stream_number-1]
+print("*********************Video Title************************")
+#get Video Title
+print(my_video.title)
 
-video.download()
-print("video downloaded")
+print("********************Tumbnail Image***********************")
+#get Thumbnail Image
+print(my_video.thumbnail_url)
+
+print("********************Download video*************************")
+
+for stream in my_video.streams:
+    print(stream)
+
+
+my_video = my_video.streams.get_highest_resolution()
+my_video.download()
